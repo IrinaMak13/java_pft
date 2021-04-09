@@ -15,5 +15,5 @@ gradle-app.setting
 .idea/workspace.xml
 
 # IntelliJ Idea
-.idea
-.iml
+**/.idea
+**.iml
