@@ -1,16 +1,12 @@
 package ru.stqa.pft.addressbook;
 
 import java.util.concurrent.TimeUnit;
-
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static junit.framework.TestCase.fail;
-
-public class GroupCreationsTests {
+public class GroupCreationTests {
   private WebDriver wd;
-
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
@@ -32,15 +28,20 @@ public class GroupCreationsTests {
 
   @Test
   public void testGroupCreation() throws Exception {
-    gotoGroupPage();
-    fillGroupForm(new GroupData("test1", "test2", "test3"));
+    goToGroupPage();
+    initGroupCreation();
+    fillGroupForm(new GroupData("name1", "header1", "footer1"));
     submitGroupCreation();
-    gotoGroupPage();
     returnToGroupPage();
+    logOut();
+  }
+
+  private void logOut() {
+    wd.findElement(By.linkText("Logout")).click();
   }
 
   private void returnToGroupPage() {
-    wd.findElement(By.linkText("group page")).click();
+    wd.findElement(By.linkText("groups")).click();
   }
 
   private void submitGroupCreation() {
@@ -48,7 +49,6 @@ public class GroupCreationsTests {
   }
 
   private void fillGroupForm(GroupData groupData) {
-    initGroupCreation();
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
     wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
@@ -64,7 +64,7 @@ public class GroupCreationsTests {
     wd.findElement(By.name("new")).click();
   }
 
-  private void gotoGroupPage() {
+  private void goToGroupPage() {
     wd.findElement(By.linkText("groups")).click();
   }
 
