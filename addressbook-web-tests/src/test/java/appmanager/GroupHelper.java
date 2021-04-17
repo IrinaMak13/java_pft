@@ -2,12 +2,12 @@ package appmanager;
 
 import model.GroupData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class GroupHelper {
-  public WebDriver wd;
+  private FirefoxDriver wd;
 
-  public GroupHelper(WebDriver wd) {
+  public GroupHelper(FirefoxDriver wd) {
     this.wd = wd;
   }
 

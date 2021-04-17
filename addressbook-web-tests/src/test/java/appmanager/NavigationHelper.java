@@ -2,11 +2,12 @@ package appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NavigationHelper {
-  private WebDriver wd;
+  private FirefoxDriver wd;
 
-  public NavigationHelper(WebDriver wd) {
+  public NavigationHelper(FirefoxDriver wd) {
     this.wd = wd;
   }
 

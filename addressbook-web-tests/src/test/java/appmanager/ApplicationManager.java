@@ -3,23 +3,31 @@ package appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import model.ContactData;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-  public WebDriver wd;
+  FirefoxDriver wd;
 
-  private SessionHelper sessionHelper;
-  private NavigationHelper navigationHelper;
+  private ContactHelper contactHelper;
+  public SessionHelper sessionHelper;
+  public NavigationHelper navigationHelper;
   public GroupHelper groupHelper;
+
+  public ApplicationManager(FirefoxDriver wd) {
+    this.wd = wd;
+  }
+
+  public ApplicationManager() {
+
+  }
 
   public void init() {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost:8080/addressbook/group.php");
+    contactHelper = new ContactHelper(wd);
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
@@ -27,9 +35,8 @@ public class ApplicationManager {
   }
 
 
-
   public void logOut() {
-    groupHelper.wd.findElement(By.linkText("Logout")).click();
+    wd.findElement(By.linkText("Logout")).click();
   }
 
   public void stop() {
@@ -38,7 +45,7 @@ public class ApplicationManager {
 
   public boolean isElementPresent(By by) {
     try {
-      groupHelper.wd.findElement(by);
+      wd.findElement(by);
       return true;
     } catch (NoSuchElementException e) {
       return false;
@@ -47,42 +54,11 @@ public class ApplicationManager {
 
   public boolean isAlertPresent() {
     try {
-      groupHelper.wd.switchTo().alert();
+      wd.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
       return false;
     }
-  }
-
-  public void returnToHomePage() {
-    groupHelper.wd.findElement(By.linkText("home page")).click();
-  }
-
-  public void submitContactCreation() {
-    groupHelper.wd.findElement(By.name("theform")).click();
-    groupHelper.wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
-  }
-
-  public void fillContactForm(ContactData contactData) {
-    groupHelper.wd.findElement(By.name("firstname")).click();
-    groupHelper.wd.findElement(By.name("firstname")).clear();
-    groupHelper.wd.findElement(By.name("firstname")).sendKeys(contactData.getName());
-    groupHelper.wd.findElement(By.name("lastname")).click();
-    groupHelper.wd.findElement(By.name("lastname")).clear();
-    groupHelper.wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-    groupHelper.wd.findElement(By.name("theform")).click();
-    groupHelper.wd.findElement(By.name("theform")).click();
-    groupHelper.wd.findElement(By.name("theform")).click();
-    groupHelper.wd.findElement(By.name("address")).click();
-    groupHelper.wd.findElement(By.name("address")).clear();
-    groupHelper.wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
-    groupHelper.wd.findElement(By.name("mobile")).click();
-    groupHelper.wd.findElement(By.name("mobile")).clear();
-    groupHelper.wd.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
-  }
-
-  public void goToAddNewContactPage() {
-    groupHelper.wd.findElement(By.linkText("add new")).click();
   }
 
   public GroupHelper getGroupHelper() {
@@ -91,5 +67,9 @@ public class ApplicationManager {
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public ContactHelper getContactHelper() {
+    return contactHelper;
   }
 }
