@@ -21,12 +21,35 @@ public class ContactHelper extends HelperBase {
   public void fillContactForm(ContactData contactData) {
     type (By.name("firstname"), contactData.getName());
     type (By.name("lastname"), contactData.getLastName());
-    click (By.name("theform"));
     type (By.name("address"), contactData.getAddress());
     type (By.name("mobile"), contactData.getMobile());
   }
 
   public void goToAddNewContactPage() {
     click(By.linkText("add new"));
+  }
+
+  public void initContactModification() {
+   click(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void submitContactModification() {
+    click(By.xpath("(//input[@name='update'])[2]"));
+  }
+
+  public void gotoHomePage() {
+    click(By.linkText("home"));
+    }
+
+  public void selectContact() {
+    click(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=1]"));
+  }
+
+  public void clickDeletebutton() {
+    click (By.xpath("//input[@value='Delete']"));
+  }
+
+  public void agreeForDeletion() {
+    wd.switchTo().alert().accept();
   }
 }
