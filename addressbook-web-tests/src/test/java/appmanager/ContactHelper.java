@@ -45,9 +45,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='update'])[2]"));
   }
 
-  public void gotoHomePage() {
-    click(By.linkText("home"));
-    }
+
 
   public void selectContact() {
     click(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=1]"));
