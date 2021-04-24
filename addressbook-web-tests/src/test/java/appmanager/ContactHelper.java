@@ -58,4 +58,14 @@ public class ContactHelper extends HelperBase {
   public void agreeForDeletion() {
     wd.switchTo().alert().accept();
   }
+
+  public void createContact(ContactData contact, boolean b) {
+    fillContactForm((contact), b);
+    submitContactCreation();
+    returnToHomePage();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=1]"));
+  }
 }
