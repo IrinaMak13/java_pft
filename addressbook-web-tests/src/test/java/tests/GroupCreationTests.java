@@ -1,8 +1,8 @@
 package tests;
 
-import org.testng.Assert;
-import org.testng.annotations.*;
 import model.GroupData;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
