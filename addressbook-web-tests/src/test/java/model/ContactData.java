@@ -44,4 +44,6 @@ public class ContactData {
   }
 
 
+  public void add(ContactData contact) {
+  }
 }
