@@ -1,7 +1,7 @@
 package model;
 
 public class ContactData {
-  private final String name;
+  private String firstname;
   private final String lastName;
   private final String address;
   private final String mobile;
@@ -9,8 +9,8 @@ public class ContactData {
   private final String email;
 
 
-  public ContactData(String name, String lastName, String address, String mobile, String group, String email) {
-    this.name = name;
+  public ContactData(String firstname, String lastName, String address, String mobile, String group, String email) {
+    this.firstname = firstname;
     this.lastName = lastName;
     this.address = address;
     this.mobile = mobile;
@@ -19,7 +19,7 @@ public class ContactData {
   }
 
   public String getName() {
-    return name;
+    return firstname;
   }
 
   public String getLastName() {
