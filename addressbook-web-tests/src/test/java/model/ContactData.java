@@ -3,7 +3,7 @@ package model;
 import java.util.Objects;
 
 public class ContactData {
-  private final String id;
+  private int id;
   private final String firstname;
   private final String lastName;
   private final String address;
@@ -14,7 +14,7 @@ public class ContactData {
 
 
   public ContactData(String firstname, String lastName, String address, String mobile, String group, String email) {
-    this.id = null;
+    this.id = 0;
     this.firstname = firstname;
     this.lastName = lastName;
     this.address = address;
@@ -23,7 +23,7 @@ public class ContactData {
     this.email = email;
   }
 
-  public ContactData(String id, String firstname, String lastName, String address, String mobile, String group, String email) {
+  public ContactData(int id, String firstname, String lastName, String address, String mobile, String group, String email) {
     this.id = id;
     this.firstname = firstname;
     this.lastName = lastName;
@@ -33,8 +33,12 @@ public class ContactData {
     this.email = email;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -67,11 +71,19 @@ public class ContactData {
   }
 
   @Override
+  public String toString() {
+    return "ContactData{" +
+            "id='" + id + '\'' +
+            ", firstname='" + firstname + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+  }
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return Objects.equals(id, that.id) &&
+    return id == that.id &&
             Objects.equals(firstname, that.firstname) &&
             Objects.equals(lastName, that.lastName);
   }
@@ -80,14 +92,4 @@ public class ContactData {
   public int hashCode() {
     return Objects.hash(id, firstname, lastName);
   }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id='" + id + '\'' +
-            ", firstname='" + firstname + '\'' +
-            ", lastName='" + lastName + '\'' +
-            '}';
-  }
-
 }

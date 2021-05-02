@@ -43,15 +43,13 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void initContactModification() {
-   click(By.xpath("//img[@alt='Edit']"));
+  public void initContactModification(int id) {
+    click(By.xpath("//a[@href='edit.php?id=" + id + "']"));
   }
 
   public void submitContactModification() {
     click(By.xpath("(//input[@name='update'])[2]"));
   }
-
-
 
   public void selectContact() {
     click(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=1]"));
@@ -68,7 +66,6 @@ public class ContactHelper extends HelperBase {
   public void createContact(ContactData contact, boolean b) {
     fillContactForm((contact), b);
     submitContactCreation();
-    returnToHomePage();
   }
 
   public boolean isThereAContact() {
@@ -84,11 +81,19 @@ public class ContactHelper extends HelperBase {
     List<WebElement>elements = wd.findElements(By.name("entry"));
     for (WebElement element: elements) {
       List<WebElement> subElements = element.findElements(By.cssSelector("td"));
-      String firstname = subElements.get(1).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String lastname = subElements.get(1).getText();
-      ContactData contact = new ContactData(firstname, lastname, null, null, null, null);
+      String firstname = subElements.get(2).getText();
+      ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;
+  }
+
+  public void selectContact(int i)  {
+    click(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=" + i + "]"));
+  }
+
+  public void fillContactForm(ContactData contact) {
   }
 }

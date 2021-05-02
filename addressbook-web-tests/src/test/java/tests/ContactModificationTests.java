@@ -1,25 +1,37 @@
 package tests;
 
 import model.ContactData;
+import model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
+
   @Test
-  public void testContactModification () {
+  public void testContactModification() {
     app.getNavigationHelper().gotoHomePage();
     List<ContactData> before = app.getContactHelper().getContactList();
-    if (! app.getContactHelper().isThereAContact()){
-      app.getContactHelper().createContact(new ContactData("First Name1", "Last Name 1", "Address1", "123456789", "name1" , "test1@mail.ru"), true);
+    if (!app.getContactHelper().isThereAContact()) {
+      app.getContactHelper().createContact(new ContactData("First Name1", "Last Name 1", "Address1", "123456789", "name1", "test1@mail.ru"), true);
     }
-    app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("First Name2", "Last Name 2", "Address2", "345613243", "name2" , "test2@mail.ru"), false);
+    app.getContactHelper().selectContact(before.size());
+    int id = before.get(before.size() - 1).getId();
+    app.getContactHelper().initContactModification(id);
+    ContactData contact = new ContactData(id,"First Name1", "Last Name 1", "Address1", "123456789", "name1", "test1@mail.ru");
+    app.getContactHelper().fillContactForm(contact, false);
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size (), before.size ());
+    Assert.assertEquals(after.size(), before.size());
+
+    before.remove(before.size() - 1);
+    before.add(contact);
+    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
   }
 }
+
+
