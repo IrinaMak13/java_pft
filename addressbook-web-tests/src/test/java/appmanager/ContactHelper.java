@@ -68,6 +68,14 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
   }
 
+  public void modifyContact(List<ContactData> before, int id, ContactData contact) {
+    selectContact(before.size());
+    initContactModification(id);
+    fillContactForm(contact, false);
+    submitContactModification();
+    returnToHomePage();
+  }
+
   public boolean isThereAContact() {
     return isElementPresent(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=1]"));
   }
