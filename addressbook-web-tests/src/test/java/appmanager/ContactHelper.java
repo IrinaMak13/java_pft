@@ -63,12 +63,12 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void createContact(ContactData contact, boolean b) {
+  public void create(ContactData contact, boolean b) {
     fillContactForm((contact), b);
     submitContactCreation();
   }
 
-  public void modifyContact(List<ContactData> before, int id, ContactData contact) {
+  public void modify(List<ContactData> before, int id, ContactData contact) {
     selectContact(before.size());
     initContactModification(id);
     fillContactForm(contact, false);
@@ -84,7 +84,7 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement>elements = wd.findElements(By.name("entry"));
     for (WebElement element: elements) {
@@ -100,6 +100,12 @@ public class ContactHelper extends HelperBase {
 
   public void selectContact(int i)  {
     click(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=" + i + "]"));
+  }
+
+  public void delete() {
+    selectContact();
+    clickDeletebutton();
+    agreeForDeletion();
   }
 
   public void fillContactForm(ContactData contact) {
