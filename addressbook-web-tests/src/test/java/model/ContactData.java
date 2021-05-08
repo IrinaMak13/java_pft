@@ -3,42 +3,51 @@ package model;
 import java.util.Objects;
 
 public class ContactData {
-  private int id;
-  private final String firstname;
-  private final String lastName;
-  private final String address;
-  private final String mobile;
-  private final String group;
-  private final String email;
-
-
-
-  public ContactData(String firstname, String lastName, String address, String mobile, String group, String email) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastName = lastName;
-    this.address = address;
-    this.mobile = mobile;
-    this.group = group;
-    this.email = email;
-  }
-
-  public ContactData(int id, String firstname, String lastName, String address, String mobile, String group, String email) {
-    this.id = id;
-    this.firstname = firstname;
-    this.lastName = lastName;
-    this.address = address;
-    this.mobile = mobile;
-    this.group = group;
-    this.email = email;
-  }
+  private int id = Integer.MAX_VALUE;
+  private  String firstname;
+  private  String lastName;
+  private  String address;
+  private  String mobile;
+  private  String group;
+  private  String email;
 
   public int getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withMobile(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
   }
 
   public String getName() {
