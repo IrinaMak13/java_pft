@@ -9,7 +9,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -55,6 +57,10 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=1]"));
   }
 
+  public void selectContactById(int id) {
+    click(By.xpath("(//input[@type='checkbox' and @name='selected[]' and @value='"+id+"'])"));
+  }
+
   public void clickDeletebutton() {
     click (By.xpath("//input[@value='Delete']"));
   }
@@ -68,9 +74,9 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
   }
 
-  public void modify(List<ContactData> before, int id, ContactData contact) {
-    selectContact(before.size());
-    initContactModification(id);
+  public void modify(ContactData contact) {
+    selectContactById(contact.getId());
+    initContactModification(contact.getId());
     fillContactForm(contact, false);
     submitContactModification();
     returnToHomePage();
@@ -97,6 +103,19 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
+    List<WebElement>elements = wd.findElements(By.name("entry"));
+    for (WebElement element: elements) {
+      List<WebElement> subElements = element.findElements(By.cssSelector("td"));
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      String lastname = subElements.get(1).getText();
+      String firstname = subElements.get(2).getText();
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastName(lastname));
+    }
+    return contacts;
+  }
+
   public void selectContact(int i)  {
     click(By.xpath("(//input[@type='checkbox' and @name='selected[]'])[position()=" + i + "]"));
   }
@@ -107,6 +126,13 @@ public class ContactHelper extends HelperBase {
     agreeForDeletion();
   }
 
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
+    clickDeletebutton();
+    agreeForDeletion();
+  }
+
   public void fillContactForm(ContactData contact) {
   }
+
 }
