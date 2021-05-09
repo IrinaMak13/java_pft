@@ -26,8 +26,8 @@ public void ensurePreconditions() {
     ContactData contact = new ContactData()
             .withId(modifiedContact.getId()).withFirstname("First Name1").withLastName("Last Name 1").withAddress("Address1").withMobile("123456789").withGroup("name1").withEmail("test1@mail.ru");
     app.contact().modify(contact);
+    assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
-    assertEquals(after.size(), before.size());
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 
