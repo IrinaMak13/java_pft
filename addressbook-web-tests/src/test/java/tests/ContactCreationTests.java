@@ -14,7 +14,7 @@ public class ContactCreationTests extends TestBase {
     app.goTo().homePage();
     Contacts before = app.contact().all();
     app.contact().goToAddNewContactPage();
-    ContactData contact = new ContactData().withFirstname("First Name1").withLastName("Last Name 1").withAddress("Address1").withHome("213456789").withMobile("123456789").withWork("323456789").withGroup("name1").withEmail("test1@mail.ru");
+    ContactData contact = new ContactData().withFirstname("First Name1").withLastName("Last Name 1").withAddress("Address1").withHome("+7213456789").withMobile("+7123456789").withWork("+7323456789").withGroup("name1").withEmail("test1@mail.ru");
     boolean b = true;
     app.contact().create((contact),b);
     app.goTo().homePage();
@@ -30,7 +30,7 @@ public class ContactCreationTests extends TestBase {
     app.goTo().homePage();
     Contacts before = app.contact().all();
     app.contact().goToAddNewContactPage();
-    ContactData contact = new ContactData().withFirstname("First Name1'").withLastName("Last Name 1").withAddress("Address1").withMobile("123456789").withGroup("name1").withEmail("test1@mail.ru");
+    ContactData contact = new ContactData().withFirstname("First Name1'").withLastName("Last Name 1").withAddress("Address1").withMobile("+7123456789").withGroup("name1").withEmail("test1@mail.ru");
     boolean b = true;
     app.contact().create((contact),b);
     app.goTo().homePage();
