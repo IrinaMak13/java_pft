@@ -4,6 +4,9 @@ package tests;
 import model.ContactData;
 import model.Contacts;
 import org.testng.annotations.Test;
+
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -14,7 +17,8 @@ public class ContactCreationTests extends TestBase {
     app.goTo().homePage();
     Contacts before = app.contact().all();
     app.contact().goToAddNewContactPage();
-    ContactData contact = new ContactData().withFirstname("First Name1").withLastName("Last Name 1").withAddress("Address1").withHome("+7213456789").withMobile("+7123456789").withWork("+7323456789").withGroup("name1").withEmail("test1@mail.ru");
+    File photo = new File("src/test/resources/smile.jpg");
+    ContactData contact = new ContactData().withFirstname("First Name1").withLastName("Last Name 1").withAddress("Address1").withHome("+7213456789").withMobile("+7123456789").withWork("+7323456789").withGroup("name1").withEmail("test1@mail.ru").withPhoto(photo);
     boolean b = true;
     app.contact().create((contact),b);
     app.goTo().homePage();
@@ -24,6 +28,8 @@ public class ContactCreationTests extends TestBase {
             before.withAdded(contact.withId(after.stream().mapToInt((c)->c.getId()).max().getAsInt()))));
 
   }
+
+
 
   @Test
   protected void testBadContactCreation() throws Exception {
