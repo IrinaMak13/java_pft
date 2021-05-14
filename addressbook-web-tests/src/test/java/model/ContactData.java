@@ -1,5 +1,6 @@
 package model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -12,14 +13,20 @@ import java.util.Objects;
 public class ContactData {
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+  @Expose
   private  String firstname;
+  @Expose
   private  String lastName;
+  @Expose
   private  String address;
   private  String home;
+  @Expose
   private  String mobile;
   private  String work;
   private  String allPhones;
+  @Expose
   private  String group;
+  @Expose
   private  String email;
   private  String email2;
   private  String email3;
