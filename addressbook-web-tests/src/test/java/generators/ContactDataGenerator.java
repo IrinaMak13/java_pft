@@ -41,16 +41,22 @@ public class ContactDataGenerator {
   private void save(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts){
-     writer.write(String.format("%s; %s\n",contact.getName(),contact.getLastName()));
+     writer.write(String.format("%s; %s; %s; %s; %s; %s,\n",contact.getName(),contact.getLastName(), contact.getAddress(),contact.getMobile(), contact.getGroup(), contact.getEmail()));
     }
     writer.close();
   }
+  
 
   private  List<ContactData> generateContact(int count) {
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i =0; i < count; i++) {
-      contacts.add(new ContactData().withFirstname(String.format("firstname %s",i))
-              .withLastName(String.format("lastname %s", i)));
+      contacts.add(new ContactData()
+              .withFirstname(String.format("firstname %s",i))
+              .withLastName(String.format("lastname %s", i))
+              .withAddress(String.format("address %s", i))
+              .withMobile(String.format("mobile %s", i))
+              .withGroup(String.format("group %s", i))
+              .withEmail(String.format("email %s", i)));
     }
     return contacts;
   }
