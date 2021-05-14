@@ -1,8 +1,18 @@
 package model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.util.Objects;
+@XStreamAlias("group")
 
 public class GroupData {
+  @XStreamOmitField
+  private int id = Integer.MAX_VALUE;
+  private  String name;
+  private  String header;
+  private  String footer;
 
   public GroupData withId(int id) {
     this.id = id;
@@ -28,10 +38,7 @@ public class GroupData {
     return this;
   }
 
-  private int id = Integer.MAX_VALUE;
-  private  String name;
-  private  String header;
-  private  String footer;
+
 
 
   public String getName() {
