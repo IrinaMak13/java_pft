@@ -1,7 +1,7 @@
-package tests;
+package ru.stqa.pft.addressbook.tests.tests;
 
-import model.ContactData;
-import model.Contacts;
+import ru.stqa.pft.addressbook.tests.model.ContactData;
+import ru.stqa.pft.addressbook.tests.model.Contacts;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.equalTo;

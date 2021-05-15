@@ -1,10 +1,7 @@
-package tests;
+package ru.stqa.pft.addressbook.tests.tests;
 
-import model.ContactData;
+import ru.stqa.pft.addressbook.tests.model.ContactData;
 import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

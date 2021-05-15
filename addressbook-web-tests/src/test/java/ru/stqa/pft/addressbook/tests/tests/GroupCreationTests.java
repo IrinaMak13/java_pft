@@ -1,15 +1,14 @@
-package tests;
+package ru.stqa.pft.addressbook.tests.tests;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
-import model.GroupData;
-import model.Groups;
+import ru.stqa.pft.addressbook.tests.model.GroupData;
+import ru.stqa.pft.addressbook.tests.model.Groups;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;

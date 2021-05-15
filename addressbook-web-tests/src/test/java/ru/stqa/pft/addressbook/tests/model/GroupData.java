@@ -1,8 +1,7 @@
-package model;
+package ru.stqa.pft.addressbook.tests.model;
 
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import java.util.Objects;

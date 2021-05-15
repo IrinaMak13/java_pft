@@ -1,6 +1,6 @@
-package tests;
+package ru.stqa.pft.addressbook.tests.tests;
 
-import appmanager.ApplicationManager;
+import ru.stqa.pft.addressbook.tests.appmanager.ApplicationManager;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;

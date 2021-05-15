@@ -1,7 +1,7 @@
-package appmanager;
+package ru.stqa.pft.addressbook.tests.appmanager;
 
-import model.GroupData;
-import model.Groups;
+import ru.stqa.pft.addressbook.tests.model.GroupData;
+import ru.stqa.pft.addressbook.tests.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

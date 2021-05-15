@@ -1,4 +1,4 @@
-package generators;
+package ru.stqa.pft.addressbook.tests.generators;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
@@ -6,12 +6,11 @@ import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
-import model.GroupData;
+import ru.stqa.pft.addressbook.tests.model.GroupData;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
