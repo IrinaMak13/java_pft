@@ -20,3 +20,14 @@ dependencies {
     implementation 'dev.galasa:gson:2.8.5'
 
 }
+
+task testGroups (type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-groups.xml'
+    }
+}
+task testContacts (type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-contacts.xml'
+    }
+
