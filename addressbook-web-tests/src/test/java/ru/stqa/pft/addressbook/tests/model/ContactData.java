@@ -3,41 +3,90 @@ package ru.stqa.pft.addressbook.tests.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
+import java.time.Instant;
+import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name="addressbook")
 @XStreamAlias("contact")
-
 public class ContactData {
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
   private  String firstname;
+
   @Expose
+  @Column(name = "lastName")
   private  String lastName;
+
   @Expose
+  @Transient
+  @Column(name = "address")
   private  String address;
+
+  @Column(name = "home")
+  @Type(type="text")
   private  String home;
+
   @Expose
+  @Column(name = "mobile")
+  @Type(type="text")
   private  String mobile;
+
+  @Column(name = "work")
+  @Type(type="text")
   private  String work;
+
+  @Transient
   private  String allPhones;
+
   @Expose
+  @Transient
   private  String group;
+
   @Expose
+  @Transient
   private  String email;
+
+  @Transient
   private  String email2;
+
+  @Transient
   private  String email3;
+
+  @Transient
   private  String allEmails;
-  private File photo;
+
+  @Column(name = "photo")
+  @Type(type="text")
+  private String photo;
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+  }
+
+
 
   public File getPhoto() {
-    return photo;
+    return new File (photo);
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -160,15 +209,6 @@ public class ContactData {
 
 
   public void add(ContactData contact) {
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id='" + id + '\'' +
-            ", firstname='" + firstname + '\'' +
-            ", lastName='" + lastName + '\'' +
-            '}';
   }
 
   @Override
