@@ -18,6 +18,7 @@ dependencies {
     implementation 'com.beust:jcommander:1.81'
     implementation 'com.thoughtworks.xstream:xstream:1.4.16'
     implementation 'dev.galasa:gson:2.8.5'
+    implementation 'mysql:mysql-connector-java:5.1.49'
 
 }
 
