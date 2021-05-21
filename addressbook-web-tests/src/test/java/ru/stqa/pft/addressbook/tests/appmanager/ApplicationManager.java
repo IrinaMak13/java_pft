@@ -24,6 +24,7 @@ public class ApplicationManager {
   public NavigationHelper navigationHelper;
   public GroupHelper groupHelper;
   public String browser;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser)  {
     this.browser = browser;
@@ -34,50 +35,54 @@ public class ApplicationManager {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
     if (browser.equals(BrowserType.FIREFOX)) {
-    wd = new FirefoxDriver();
-   } else if (browser.equals(BrowserType.CHROME)) {
-     wd = new ChromeDriver();
-   }else if (browser.equals(BrowserType.IE)){
-     wd = new InternetExplorerDriver();
-   }
+      wd = new FirefoxDriver();
+    } else if (browser.equals(BrowserType.CHROME)) {
+      wd = new ChromeDriver();
+    } else if (browser.equals(BrowserType.IE)) {
+      wd = new InternetExplorerDriver();
+    }
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
     contactHelper = new ContactHelper(wd);
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
-    sessionHelper.login(properties.getProperty("web.adminLogin"),properties.getProperty("web.adminPassword"));
+    sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+    dbHelper = new DbHelper();
+
+
   }
 
+    public void logOut () {
+      wd.findElement(By.linkText("Logout")).click();
+    }
 
-  public void logOut() {
-    wd.findElement(By.linkText("Logout")).click();
-  }
+    public void stop () {
+      wd.quit();
+    }
 
-  public void stop() {
-    wd.quit();
-  }
+    public boolean isElementPresent (By by){
+      try {
+        wd.findElement(by);
+        return true;
+      } catch (NoSuchElementException e) {
+        return false;
+      }
+    }
 
-  public boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
+    public GroupHelper group () {
+      return groupHelper;
+    }
+
+    public NavigationHelper goTo () {
+      return navigationHelper;
+    }
+
+    public ContactHelper contact () {
+      return contactHelper;
+    }
+
+    public DbHelper db () {
+      return dbHelper;
     }
   }
-
-
-
-  public GroupHelper group() {
-    return groupHelper;
-  }
-
-  public NavigationHelper goTo() {
-    return navigationHelper;
-  }
-
-  public ContactHelper contact() {
-    return contactHelper;
-  }
-}
