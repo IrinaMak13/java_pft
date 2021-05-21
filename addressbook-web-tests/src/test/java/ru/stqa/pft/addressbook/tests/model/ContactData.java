@@ -7,8 +7,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
-import java.time.Instant;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -29,8 +27,8 @@ public class ContactData {
   private  String lastName;
 
   @Expose
-  @Transient
   @Column(name = "address")
+  @Type(type="text")
   private  String address;
 
   @Column(name = "home")
@@ -54,7 +52,7 @@ public class ContactData {
   private  String group;
 
   @Expose
-  @Transient
+  @Type(type="text")
   private  String email;
 
   @Transient
@@ -71,6 +69,28 @@ public class ContactData {
   private String photo;
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id &&
+            Objects.equals(firstname, that.firstname) &&
+            Objects.equals(lastName, that.lastName) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(home, that.home) &&
+            Objects.equals(mobile, that.mobile) &&
+            Objects.equals(work, that.work) &&
+            Objects.equals(email, that.email) &&
+            Objects.equals(email2, that.email2) &&
+            Objects.equals(email3, that.email3);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstname, lastName, address, home, mobile, work, email, email2, email3);
+  }
+
+  @Override
   public String toString() {
     return "ContactData{" +
             "id=" + id +
@@ -82,7 +102,10 @@ public class ContactData {
 
 
   public File getPhoto() {
-    return new File (photo);
+    if (photo == null){
+      return null;
+    }
+    return new File(photo);
   }
 
   public ContactData withPhoto(File photo) {
@@ -211,18 +234,4 @@ public class ContactData {
   public void add(ContactData contact) {
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastName, that.lastName);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname, lastName);
-  }
 }
