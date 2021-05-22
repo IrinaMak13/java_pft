@@ -22,7 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-  @DataProvider
+//  @DataProvider
   public Iterator<Object[]> validContactsFromXml() throws IOException {
     try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
       String xml = "";
@@ -38,7 +38,7 @@ public class ContactCreationTests extends TestBase {
     }
   }
 
-  @DataProvider
+//  @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
     try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
       String json = "";
@@ -54,20 +54,22 @@ public class ContactCreationTests extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validContactsFromJson")
-  protected void testContactCreation(ContactData contact) throws Exception {
+  @Test
+  protected void testContactCreation() throws Exception {
     app.goTo().homePage();
-      Contacts before = app.contact().all();
-      app.contact().goToAddNewContactPage();
-      File photo = new File("src/test/resources/smile.jpg");
-      boolean b = true;
-      app.contact().create((contact), b);
-      app.goTo().homePage();
-      assertThat(app.contact().count(), equalTo(before.size() + 1));
-      Contacts after = app.contact().all();
-      assertThat(after, equalTo(
-              before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-    }
+    Contacts before = app.db().contacts();
+    app.contact().goToAddNewContactPage();
+    File photo = new File("src/test/resources/smile.jpg");
+    boolean b = true;
+    ContactData contact = new ContactData()
+            .withFirstname("First Name1").withLastName("Last Name 1").withAddress("Address1").withHome("").withMobile("+7123456789").withWork("").withGroup("name1").withEmail("test1@mail.ru");
+    app.contact().create((contact), b);
+    app.goTo().homePage();
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
+    assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+  }
 
 
   //@Test
