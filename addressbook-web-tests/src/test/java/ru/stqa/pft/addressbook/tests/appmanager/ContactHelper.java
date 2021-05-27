@@ -14,6 +14,16 @@ import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
+  public void addContactToGroup(int groupId) {
+    new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(groupId));
+    click(By.name("add"));
+  }
+
+  public void goToGroupPage(int groupId) {
+    new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(groupId));
+  }
+
+
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
@@ -36,9 +46,12 @@ public class ContactHelper extends HelperBase {
     attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      } else {
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
+      }
     }
   }
 
@@ -169,5 +182,9 @@ public class ContactHelper extends HelperBase {
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();
 
+  }
+
+  public void removeContactFromGroup() {
+      click(By.name("remove"));
   }
 }

@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.tests.model.ContactData;
 import ru.stqa.pft.addressbook.tests.model.Contacts;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.tests.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,19 +57,20 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   protected void testContactCreation() throws Exception {
+    Groups groups = app.db().groups();
+    ContactData newContact = new ContactData().withFirstname("First Name1").withLastName("Last Name 1").withAddress("Address1").withHome("").withMobile("+7123456789").withWork("").withEmail("test1@mail.ru")
+    .inGroup(groups.iterator().next());
+    File photo = new File("src/test/resources/smile.jpg");
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     app.contact().goToAddNewContactPage();
-    File photo = new File("src/test/resources/smile.jpg");
     boolean b = true;
-    ContactData contact = new ContactData()
-            .withFirstname("First Name1").withLastName("Last Name 1").withAddress("Address1").withHome("").withMobile("+7123456789").withWork("").withGroup("name1").withEmail("test1@mail.ru");
-    app.contact().create((contact), b);
+    app.contact().create((newContact), b);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(
-            before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+            before.withAdded(newContact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     verifyContactListInUI();
 
   }
@@ -79,7 +81,7 @@ public class ContactCreationTests extends TestBase {
     app.goTo().homePage();
     Contacts before = app.contact().all();
     app.contact().goToAddNewContactPage();
-    ContactData contact = new ContactData().withFirstname("First Name1'").withLastName("Last Name 1").withAddress("Address1").withMobile("+7123456789").withGroup("test0").withEmail("test1@mail.ru");
+    ContactData contact = new ContactData().withFirstname("First Name1'").withLastName("Last Name 1").withAddress("Address1").withMobile("+7123456789").withEmail("test1@mail.ru");
     boolean b = true;
     app.contact().create((contact),b);
     app.goTo().homePage();
