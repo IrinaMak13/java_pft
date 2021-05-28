@@ -8,6 +8,8 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:4.0.0-beta-3")
     implementation ('org.testng:testng:7.4.0')
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
 }
 
 test {
