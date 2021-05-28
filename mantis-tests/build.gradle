@@ -10,6 +10,7 @@ dependencies {
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
     implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
+    compile 'commons-net:commons-net:3.4'
 }
 
 test {
