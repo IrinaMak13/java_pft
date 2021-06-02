@@ -8,13 +8,14 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:4.0.0-beta-3")
     implementation ('org.testng:testng:7.4.0')
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
-    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
     implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
     compile 'commons-net:commons-net:3.4'
     implementation 'org.subethamail:subethasmtp:3.1.7'
     implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.8'
     implementation 'com.sun.xml.messaging.saaj:saaj-impl:2.0.1'
     implementation 'ch.qos.logback:logback-access:1.2.3'
+    implementation 'mysql:mysql-connector-java:5.1.49'
+    implementation 'org.hibernate:hibernate-core:6.0.0.Alpha8'
 }
 
 test {

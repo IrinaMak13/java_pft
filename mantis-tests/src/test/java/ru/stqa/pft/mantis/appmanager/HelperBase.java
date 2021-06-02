@@ -16,6 +16,10 @@ public class HelperBase {
     this.wd = app.getDriver();
   }
 
+  protected void goToPage(String url) {
+    wd.get(app.getProperty("web.baseUrl") + url);
+  }
+
   protected void click(By locator) {
     wd.findElement(locator).click();
   }
