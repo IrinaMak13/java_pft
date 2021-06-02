@@ -20,6 +20,7 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
+  private JamesHelper jamesHelper;
 
 
   public ApplicationManager(String browser)  {
@@ -43,7 +44,7 @@ public class ApplicationManager {
   }
 
   public String getProperty(String key) {
-   return properties.getProperty(key);
+    return properties.getProperty(key);
   }
 
   public RegistrationHelper registration() {
@@ -57,7 +58,7 @@ public class ApplicationManager {
     if (ftp == null) {
       ftp = new FtpHelper(this);
     }
-  return ftp;
+    return ftp;
   }
 
 
@@ -82,5 +83,12 @@ public class ApplicationManager {
       mailHelper = new MailHelper(this);
     }
     return mailHelper;
+  }
+
+  public JamesHelper james() {
+    if (jamesHelper == null) {
+      jamesHelper = new JamesHelper(this);
+    }
+    return jamesHelper;
   }
 }
