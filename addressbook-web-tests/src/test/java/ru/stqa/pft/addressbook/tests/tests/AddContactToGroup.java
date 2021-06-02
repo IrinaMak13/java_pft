@@ -29,19 +29,13 @@ public class AddContactToGroup extends TestBase {
     }
 
     Groups groups = app.db().groups();
-    for (GroupData groupData : groups) {
-      if (!contact.getGroups().contains(groupData)) {
-        group = groupData;
-        break;
-      }
-    }
-
-    if (group == null) {
+    if (groups.size() == 0) {
       app.goTo().groupPage();
       GroupData groupNew = new GroupData().withName("myGreatGroup").withHeader("someHeader").withFooter("someFooter");
       app.group().create(groupNew);
-      int id = app.db().groups().stream().mapToInt(g -> g.getId()).max().getAsInt();
-      group = groupNew.withId(id);
+      group = app.db().groups().iterator().next();
+    } else {
+      group = groups.iterator().next();
     }
 
   }
