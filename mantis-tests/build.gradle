@@ -16,6 +16,7 @@ dependencies {
     implementation 'ch.qos.logback:logback-access:1.2.3'
     implementation 'mysql:mysql-connector-java:5.1.49'
     implementation 'org.hibernate:hibernate-core:6.0.0.Alpha8'
+    implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
 }
 
 test {
@@ -32,4 +33,15 @@ test {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
+buildscript{
+    repositories{
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'no.nils:wsdl2java:0.10'
+    }
+}
+
+apply plugin: 'no.nils.wsdl2java'
 
