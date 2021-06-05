@@ -1,4 +1,4 @@
-package ru.stqa.pft.rest;
+package ru.stqa.pft.rest.model;
 
 import java.util.Objects;
 
@@ -6,6 +6,7 @@ public class Issue {
 
   private int id;
   private String subject;
+  private Integer state;
 
   public int getId() {
     return id;
@@ -13,6 +14,15 @@ public class Issue {
 
   public Issue withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public Integer getState() {
+    return state;
+  }
+
+  public Issue withState(Integer state) {
+    this.state = state;
     return this;
   }
 

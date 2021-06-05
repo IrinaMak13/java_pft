@@ -2,7 +2,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="Rest" >
         <classes>
-            <class name="ru.stqa.pft.rest.RestTests" />
+            <class name="ru.stqa.pft.rest.tests.RestTests" />
         </classes>
     </test>
 </suite>
